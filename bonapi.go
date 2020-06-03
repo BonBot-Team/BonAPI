@@ -2,6 +2,7 @@ package main
 
 import (
     "fmt"
+    "log"
     "net/http"
     "github.com/bonbot-team/bonapi/config"
     "github.com/bonbot-team/bonapi/router"
@@ -9,18 +10,30 @@ import (
 
 func main(){
     Config, err := config.GetConfig()
-
-    router := router.Init()
     
     if err != nil {
         fmt.Println("Cannot get config")
     }
     
-	http.ListenAndServe(":" + Config.Port, router)
-	
-	log("Web server started on port " + Config.Port)
-}
-
-func log(msg string){
-    fmt.Println("[BONAPI]", msg)
+    router := router.Init()
+    
+    router.GlobalOPTIONS = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+        if r.Header.Get("Access-Control-Request-Method") != "" {
+            header := w.Header()
+            
+            header.Set("Access-Control-Allow-Methods", r.Header.Get("Allow"))
+            header.Set("Access-Control-Allow-Origin", "*")
+        }
+        
+        w.WriteHeader(http.StatusNoContent)
+    })
+    
+    srv := &http.Server {
+        Addr: ":" + Config.Port,
+        Handler: router,
+    }
+    
+    log.Println("Web server started on port " + Config.Port)
+    
+    log.Fatal(srv.ListenAndServe())
 }
