@@ -5,7 +5,6 @@ import (
     "image/png"
     "strings"
     "bytes"
-    "errors"
     "github.com/bonbot-team/bonapi/utils"
     "github.com/tfriedel6/canvas"
     Backend "github.com/tfriedel6/canvas/backend/softwarebackend"
@@ -15,22 +14,22 @@ type BonToutou struct {
     // Nothing
 }
 
-func(gen * BonToutou) GetName() string {
+func(gen *BonToutou) GetName() string {
     return "bontoutou"
 }
 
-func(gen * BonToutou) Generate(args map[string][]string)([]byte, error) {
+func(gen *BonToutou) Generate(args map[string][]string)([]byte, *utils.Error) {
 
     names, ok := args["name"]
 
     if !ok || len(names[0]) < 1 {
-        return nil, errors.New("Please specify name parameter")
+        return nil, utils.NewError(400, "Please specify name parameter")
     }
 
     name := names[0]
 
     if len(name) > 12 {
-        return nil, errors.New("Name parameter must be no more than 12 characters")
+        return nil, utils.NewError(400, "Name parameter must be no more than 12 characters")
     }
 
     colorss, ok := args["colors"]
@@ -55,7 +54,7 @@ func(gen * BonToutou) Generate(args map[string][]string)([]byte, error) {
     img, err := ctx.LoadImage(path.Join("assets", "imgs", "bontoutou.png"))
     
     if err != nil {
-        return nil, err
+        return nil, utils.NewError(503, err.Error())
     }
 
     w, h := float64(ctx.Width()), float64(ctx.Height())
@@ -140,7 +139,7 @@ func(gen * BonToutou) Generate(args map[string][]string)([]byte, error) {
     err = png.Encode(f, backend.Image)
 
     if err != nil {
-        return nil, err
+        return nil, utils.NewError(503, err.Error())
     }
 
     bytes := f.Bytes()

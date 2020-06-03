@@ -11,6 +11,7 @@ func Init() *httprouter.Router {
     
     router.GET("/docs", DocsRoute)
     router.GET("/api/create/:generator", CreateRoute)
+    router.GET("/api/download/:generator", DownloadRoute)
     
     return router
 }

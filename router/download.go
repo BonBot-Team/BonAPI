@@ -9,7 +9,7 @@ import (
     "github.com/julienschmidt/httprouter"
 )
 
-func CreateRoute(res http.ResponseWriter, req *http.Request, p httprouter.Params) {
+func DownloadRoute(res http.ResponseWriter, req *http.Request, p httprouter.Params) {
     
     genName := strings.ToLower(p.ByName("generator"))
     genPtr := generator.GetMgr().Get(genName)
@@ -32,13 +32,17 @@ func CreateRoute(res http.ResponseWriter, req *http.Request, p httprouter.Params
     if err != nil {
         json, _ := json.Marshal(err)
         
-        res.Header().Set("Content-Type", "image/png")
         res.WriteHeader(err.Code)
         res.Write(json)
         return
     }
     
+    names, _ := args["name"]
+    name := names[0]
+    
+    res.Header().Set("Content-Disposition", "attachment; filename=bon_" + strings.ReplaceAll(name, "_", " ") + ".png")
     res.Header().Set("Content-Type", "image/png")
+    
     res.WriteHeader(200)
     res.Write(bytes)
 }
