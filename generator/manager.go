@@ -1,8 +1,6 @@
 package generator
 
-import (
-    "github.com/bonbot-team/bonapi/generator/generators"
-)
+import "github.com/bonbot-team/bonapi/generator/generators"
 
 type GeneratorManager struct {
     Generators map[string]Generator
