@@ -1,2 +1,2 @@
-# BonAPI-rewrite
-A version of BonAPI rewritten in Go
+# BonAPI
+The API used by BonBot to generate memes
