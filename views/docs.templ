@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+		<title>BonAPI - Docs</title>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.2/css/bulma.min.css" />
+
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma-divider@0.2.0/dist/css/bulma-divider.min.css" />
+		
+		<style>
+			.color {
+				float: left;
+				width: 20px;
+				height: 20px;
+				margin: 5px;
+				border: 1px solid rgba(0, 0, 0, .2);
+			}
+		</style>
+
+		<script defer="defer" src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+	</head>
+	<body>
+		<section class="section">
+			<div class="container">
+				<h1 class="title">BonAPI Docs</h1>
+				<p class="subtitle">BonAPI is organized around REST, returns JSON-encoded responses, and uses standard HTTP response codes.</p>
+			</div>
+		</section>
+		{{ range $e := .Endpoints }}
+		<div class="is-divider"></div>
+		<section class="section">
+			<div class="container">
+				<p class="subtitle">
+					<strong>{{ $e.routeName }}</strong>
+				</p>
+				<p>{{ $e.routeDesc }}</p>
+				<br />
+
+				<p class="subtitle">
+					<strong>HTTP Request</strong>
+				</p>
+				<p>
+					<code>{{ $e.request }}</code>
+				</p>
+				<br />
+
+				<p class="subtitle">
+					<strong>Query Parameters</strong>
+				</p>
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Parameter</th>
+							<th>Default</th>
+							<th>Description</th>
+						</tr>
+					</thead>
+					<tbody>
+					{{ range $param := $e.parameters }}
+						<tr>
+							<td>{{ $param.name }}</td>
+							<td>{{ $param.default }}</td>
+							<td>{{ $param.desc }}</td>
+						</tr>
+					{{ end }}
+					</tbody>
+				</table>
+			</div>
+		</section>
+		{{ end }}
+		<div class="is-divider"></div>
+		<footer class="footer has-background-black-bis">
+			<div class="content has-text-centered has-text-grey-light">
+				Copyright 2020 BonBot
+				<br />
+Website made with
+				<i class="fa fa-heart"></i>
+				and
+				<i class="fa fa-code"></i>
+				by
+				<a href="https://twitter.com/szeroki_" style="color: #e7a854;">@szeroki</a>
+			</div>
+		</footer>
+	</body>
+</html>
