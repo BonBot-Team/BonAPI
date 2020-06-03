@@ -1,7 +1,6 @@
 package main
 
 import (
-    "fmt"
     "log"
     "net/http"
     "github.com/bonbot-team/bonapi/config"
@@ -12,7 +11,7 @@ func main(){
     Config, err := config.GetConfig()
     
     if err != nil {
-        log.Panicln("Cannot get config")
+        log.Println("Cannot get config")
         return 
     }
     
