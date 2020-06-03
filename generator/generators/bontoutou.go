@@ -59,7 +59,7 @@ func(gen *BonToutou) Generate(args map[string][]string) ([]byte, *utils.Error) {
 
     w, h := float64(ctx.Width()), float64(ctx.Height())
     
-    ctx.DrawImage(img, 0, 0)
+    ctx.DrawImage(img, 30, 15, w, h)
     
     ctx.SetFont(font, 60)
     ctx.SetFillStyle("#FFFFFF")
