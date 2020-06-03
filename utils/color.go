@@ -1,7 +1,6 @@
 package utils
 
 import (
-    "fmt"
     "regexp"
     "gopkg.in/go-playground/colors.v1"
 )
