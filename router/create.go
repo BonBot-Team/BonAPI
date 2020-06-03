@@ -32,7 +32,6 @@ func CreateRoute(res http.ResponseWriter, req *http.Request, p httprouter.Params
     if err != nil {
         json, _ := json.Marshal(err)
         
-        res.Header().Set("Content-Type", "image/png")
         res.WriteHeader(err.Code)
         res.Write(json)
         return
