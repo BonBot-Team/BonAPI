@@ -12,7 +12,8 @@ func main(){
     Config, err := config.GetConfig()
     
     if err != nil {
-        fmt.Println("Cannot get config")
+        log.Panicln("Cannot get config")
+        return 
     }
     
     router := router.Init()
