@@ -7,7 +7,7 @@ import (
     "github.com/julienschmidt/httprouter"
 )
 
-func CreateRoute(res http.ResponseWriter, req *http.Request, p httprouter.Params){
+func CreateRoute(res http.ResponseWriter, req *http.Request, p httprouter.Params) {
     
     genName := strings.ToLower(p.ByName("generator"))
     genPtr := generator.GetMgr().Get(genName)

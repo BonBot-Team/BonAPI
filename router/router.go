@@ -6,7 +6,7 @@ import (
     "github.com/julienschmidt/httprouter"
 )
 
-func Init() (*httprouter.Router) {
+func Init() *httprouter.Router {
     router := httprouter.New()
     
     router.GET("/docs", DocsRoute)
@@ -15,7 +15,7 @@ func Init() (*httprouter.Router) {
     return router
 }
 
-func GetTemplate(name string) (*template.Template, error){
+func GetTemplate(name string) (*template.Template, error) {
     t, err := template.ParseFiles(filepath.Join("views", name + ".templ"))
     
     if err != nil {

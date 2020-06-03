@@ -6,7 +6,7 @@ import (
     "github.com/julienschmidt/httprouter"
 )
 
-func DocsRoute(res http.ResponseWriter, req *http.Request, p httprouter.Params){
+func DocsRoute(res http.ResponseWriter, req *http.Request, p httprouter.Params) {
     t, err := GetTemplate("docs")
     
     if err != nil {

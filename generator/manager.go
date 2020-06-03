@@ -8,12 +8,13 @@ type GeneratorManager struct {
     Generators map[string]Generator
 }
 
-func (mgr *GeneratorManager) Init() (*GeneratorManager){
+func (mgr *GeneratorManager) Init() *GeneratorManager {
     mgr.RegisterGenerator(&generators.BonToutou{})
-return mgr
+    
+    return mgr
 }
 
-func (mgr *GeneratorManager) Get(name string) (*Generator){
+func (mgr *GeneratorManager) Get(name string) *Generator {
     gen, found := mgr.Generators[name]
     
     if !found {
@@ -23,11 +24,11 @@ func (mgr *GeneratorManager) Get(name string) (*Generator){
     return &gen
 }
 
-func (mgr *GeneratorManager) RegisterGenerator(gen Generator){
+func (mgr *GeneratorManager) RegisterGenerator(gen Generator) {
     mgr.Generators[gen.GetName()] = gen;
 }
 
-func GetMgr() (*GeneratorManager) {
+func GetMgr() *GeneratorManager {
     mgr := &GeneratorManager{}
     genMap := make(map[string]Generator)
     

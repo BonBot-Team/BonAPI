@@ -15,7 +15,7 @@ func GetColor(color *string) {
     }
 }
 
-func ConvertColors(ca []string) ([]string) {
+func ConvertColors(ca []string) []string {
     
     for index, color := range ca {
         GetColor(&color)
