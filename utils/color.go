@@ -5,7 +5,7 @@ import (
     "gopkg.in/go-playground/colors.v1"
 )
 
-func GetColor(color *string){
+func GetColor(color *string) {
     matched, err := regexp.Match("^[0-9A-F]{6}$", []byte(*color))
     
     if err == nil {
@@ -15,7 +15,7 @@ func GetColor(color *string){
     }
 }
 
-func ConvertColors(ca []string) []string {
+func ConvertColors(ca []string) ([]string) {
     
     for index, color := range ca {
         GetColor(&color)
