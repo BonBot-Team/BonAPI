@@ -40,7 +40,7 @@ func DownloadRoute(res http.ResponseWriter, req *http.Request, p httprouter.Para
     names, _ := args["name"]
     name := names[0]
     
-    res.Header().Set("Content-Disposition", "attachment; filename=bon_" + strings.ReplaceAll(name, "_", " ") + ".png")
+    res.Header().Set("Content-Disposition", "attachment; filename=bon_" + strings.ToLower(name) + ".png")
     res.Header().Set("Content-Type", "image/png")
     
     res.WriteHeader(200)
