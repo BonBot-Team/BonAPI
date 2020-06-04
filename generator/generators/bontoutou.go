@@ -18,7 +18,7 @@ func(gen *BonToutou) GetName() string {
     return "bontoutou"
 }
 
-func(gen *BonToutou) Generate(args map[string][]string) ([]byte, *utils.Error) {
+func(gen *BonToutou) Generate(args map[string][]string)([]byte, *utils.Error) {
 
     names, ok := args["name"]
 
@@ -49,6 +49,8 @@ func(gen *BonToutou) Generate(args map[string][]string) ([]byte, *utils.Error) {
     font := path.Join("assets", "fonts", "bontoutou.ttf")
     
     backend := Backend.New(256, 256)
+    backend.MSAA = 1
+    
     ctx := canvas.New(backend)
     
     img, err := ctx.LoadImage(path.Join("assets", "imgs", "bontoutou.png"))
