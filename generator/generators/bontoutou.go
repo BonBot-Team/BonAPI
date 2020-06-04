@@ -18,7 +18,7 @@ func(gen *BonToutou) GetName() string {
     return "bontoutou"
 }
 
-func(gen *BonToutou) Generate(args map[string][]string)([]byte, *utils.Error) {
+func(gen *BonToutou) Generate(args map[string][]string) ([]byte, *utils.Error) {
 
     names, ok := args["name"]
 
