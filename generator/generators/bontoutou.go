@@ -1,13 +1,13 @@
 package generators
 
 import (
-    path "path/filepath"
-    "image/png"
-    "strings"
     "bytes"
     "github.com/bonbot-team/bonapi/utils"
     "github.com/tfriedel6/canvas"
     Backend "github.com/tfriedel6/canvas/backend/softwarebackend"
+    "image/png"
+    path "path/filepath"
+    "strings"
 )
 
 type BonToutou struct {
@@ -144,7 +144,7 @@ func(gen *BonToutou) Generate(args map[string][]string) ([]byte, *utils.Error) {
         return nil, utils.NewError(503, err.Error())
     }
 
-    bytes := f.Bytes()
+    b := f.Bytes()
     
-    return bytes, nil
+    return b, nil
 }

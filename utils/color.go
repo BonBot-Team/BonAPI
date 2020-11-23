@@ -1,8 +1,8 @@
 package utils
 
 import (
-    "regexp"
     "gopkg.in/go-playground/colors.v1"
+    "regexp"
 )
 
 func GetColor(color *string) {

@@ -1,12 +1,12 @@
 package router
 
 import (
-    "net/http"
     "encoding/json"
-    "strings"
-    "github.com/bonbot-team/bonapi/utils"
     "github.com/bonbot-team/bonapi/generator"
+    "github.com/bonbot-team/bonapi/utils"
     "github.com/julienschmidt/httprouter"
+    "net/http"
+    "strings"
 )
 
 func DownloadRoute(res http.ResponseWriter, req *http.Request, p httprouter.Params) {
@@ -16,10 +16,10 @@ func DownloadRoute(res http.ResponseWriter, req *http.Request, p httprouter.Para
     
     if genPtr == nil {
         err := utils.NewError(400, genName + " generator not found")
-        json, _ := json.Marshal(err)
+        bytes, _ := json.Marshal(err)
         
         res.WriteHeader(err.Code)
-        res.Write(json)
+        _, _ = res.Write(bytes)
         return
     }
     
@@ -30,10 +30,10 @@ func DownloadRoute(res http.ResponseWriter, req *http.Request, p httprouter.Para
     bytes, err := gen.Generate(args)
     
     if err != nil {
-        json, _ := json.Marshal(err)
+        bytes, _ := json.Marshal(err)
         
         res.WriteHeader(err.Code)
-        res.Write(json)
+        _, _ = res.Write(bytes)
         return
     }
     
@@ -44,5 +44,5 @@ func DownloadRoute(res http.ResponseWriter, req *http.Request, p httprouter.Para
     res.Header().Set("Content-Type", "image/png")
     
     res.WriteHeader(200)
-    res.Write(bytes)
+    _, _ = res.Write(bytes)
 }

@@ -1,10 +1,10 @@
 package main
 
 import (
-    "log"
-    "net/http"
     "github.com/bonbot-team/bonapi/config"
     "github.com/bonbot-team/bonapi/router"
+    "log"
+    "net/http"
 )
 
 func main(){
@@ -12,14 +12,14 @@ func main(){
     
     if err != nil {
         log.Println("Cannot get config")
-        return 
+        return
     }
-    
-    router := router.Init()
-    
+
+    handler := router.Init()
+
     srv := &http.Server {
         Addr: ":" + Config.Port,
-        Handler: router,
+        Handler: handler,
     }
     
     log.Println("Web server started on port " + Config.Port)

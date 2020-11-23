@@ -1,9 +1,9 @@
 package router
 
 import (
-    "text/template"
-    "path/filepath"
     "github.com/julienschmidt/httprouter"
+    "path/filepath"
+    "text/template"
 )
 
 func Init() *httprouter.Router {
