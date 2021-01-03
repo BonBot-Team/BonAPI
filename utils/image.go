@@ -14,7 +14,7 @@ func DownloadImage(url string) (image.Image, error) {
 
 	defer response.Body.Close()
 
-	img, _,  err := image.Decode(response.Body)
+	img, _, err := image.Decode(response.Body)
 
 	if err != nil {
 		return nil, err

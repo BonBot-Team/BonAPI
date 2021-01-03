@@ -14,11 +14,11 @@ type Chat struct {
 	// Nothing
 }
 
-func(gen *Chat) GetName() string {
+func (gen *Chat) GetName() string {
 	return "chat"
 }
 
-func(gen *Chat) Generate(args map[string][]string) ([]byte, *utils.Error) {
+func (gen *Chat) Generate(args map[string][]string) ([]byte, *utils.Error) {
 
 	images, ok := args["image"]
 
@@ -58,7 +58,7 @@ func(gen *Chat) Generate(args map[string][]string) ([]byte, *utils.Error) {
 	defer chatImg.Delete()
 	defer img.Delete()
 
-	f := bytes.NewBuffer([]byte {})
+	f := bytes.NewBuffer([]byte{})
 	err = png.Encode(f, backend.Image)
 
 	if err != nil {

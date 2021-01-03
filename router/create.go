@@ -1,44 +1,44 @@
 package router
 
 import (
-    "encoding/json"
-    "github.com/bonbot-team/bonapi/generator"
-    "github.com/bonbot-team/bonapi/utils"
-    "github.com/gorilla/mux"
-    "net/http"
-    "strings"
+	"encoding/json"
+	"github.com/bonbot-team/bonapi/generator"
+	"github.com/bonbot-team/bonapi/utils"
+	"github.com/gorilla/mux"
+	"net/http"
+	"strings"
 )
 
 func CreateRoute(res http.ResponseWriter, req *http.Request) {
-    p := mux.Vars(req)
+	p := mux.Vars(req)
 
-    genName := strings.ToLower(p["generator"])
-    genPtr := generator.GetMgr().Get(genName)
-    
-    if genPtr == nil {
-        err := utils.NewError(400, genName + " generator not found")
-        bytes, _ := json.Marshal(err)
+	genName := strings.ToLower(p["generator"])
+	genPtr := generator.GetMgr().Get(genName)
 
-        res.WriteHeader(err.Code)
-        _, _ = res.Write(bytes)
-        return
-    }
+	if genPtr == nil {
+		err := utils.NewError(400, genName+" generator not found")
+		bytes, _ := json.Marshal(err)
 
-    gen := *genPtr
-    
-    args := req.URL.Query()
-    
-    bytes, err := gen.Generate(args)
-    
-    if err != nil {
-        bytes, _ := json.Marshal(err)
-        
-        res.WriteHeader(err.Code)
-        _, _ = res.Write(bytes)
-        return
-    }
-    
-    res.Header().Set("Content-Type", "image/png")
-    res.WriteHeader(200)
-    _, _ = res.Write(bytes)
+		res.WriteHeader(err.Code)
+		_, _ = res.Write(bytes)
+		return
+	}
+
+	gen := *genPtr
+
+	args := req.URL.Query()
+
+	bytes, err := gen.Generate(args)
+
+	if err != nil {
+		bytes, _ := json.Marshal(err)
+
+		res.WriteHeader(err.Code)
+		_, _ = res.Write(bytes)
+		return
+	}
+
+	res.Header().Set("Content-Type", "image/png")
+	res.WriteHeader(200)
+	_, _ = res.Write(bytes)
 }
