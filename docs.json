@@ -3,7 +3,7 @@
         {
             "routeName": "Create a \"BonToutou\" meme",
             "routeDesc": "This endpoint generates and returns a \"BonToutou\" meme image",
-            "request": "GET /api/<create|download>/bontoutou",
+            "request": "GET /api/create/bontoutou",
             "parameters": [
                 {
                     "name": "name",
@@ -14,6 +14,18 @@
                     "name": "colors",
                     "default": "#4287f5 <div class=\"color\" style=\"background: #4287f5;\"></div>",
                     "desc": "The color(s) of the name parameter, they must be separated by <code>|</code> and can be RGB codes, hex. You can make a gradient with 2 colors and beyond 2 colors, each letter will have one color."
+                }
+            ]
+        },
+        {
+            "routeName": "Create a \"Chat\" meme",
+            "routeDesc": "This endpoint generates and returns a \"Chat\" meme image",
+            "request": "GET /api/create/chat",
+            "parameters": [
+                {
+                    "name": "url",
+                    "default": "None",
+                    "desc": "The URL of the image that will be placed in the mirror."
                 }
             ]
         }

@@ -1,17 +1,17 @@
 package router
 
 import (
-    "github.com/julienschmidt/httprouter"
+    "github.com/gorilla/mux"
     "path/filepath"
     "text/template"
 )
 
-func Init() *httprouter.Router {
-    router := httprouter.New()
+func Init() *mux.Router {
+    router := mux.NewRouter()
     
-    router.GET("/docs", DocsRoute)
-    router.GET("/api/create/:generator", CreateRoute)
-    router.GET("/api/download/:generator", DownloadRoute)
+    router.HandleFunc("/docs", DocsRoute).Methods("GET")
+    router.HandleFunc("/api/create/{generator}", CreateRoute).Methods("GET")
+    router.HandleFunc("/api/download/{generator}", DownloadRoute).Methods("GET")
     
     return router
 }

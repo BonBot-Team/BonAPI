@@ -2,11 +2,10 @@ package router
 
 import (
     "github.com/bonbot-team/bonapi/config"
-    "github.com/julienschmidt/httprouter"
     "net/http"
 )
 
-func DocsRoute(res http.ResponseWriter, req *http.Request, p httprouter.Params) {
+func DocsRoute(res http.ResponseWriter, req *http.Request) {
     t, err := GetTemplate("docs")
     
     if err != nil {

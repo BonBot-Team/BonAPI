@@ -7,7 +7,8 @@ type Manager struct {
 }
 
 func (mgr *Manager) Init() *Manager {
-    mgr.RegisterGenerator(&generators.BonToutou{})
+    mgr.Register(&generators.BonToutou{})
+    mgr.Register(&generators.Chat{})
     
     return mgr
 }
@@ -22,7 +23,7 @@ func (mgr *Manager) Get(name string) *Generator {
     return &gen
 }
 
-func (mgr *Manager) RegisterGenerator(gen Generator) {
+func (mgr *Manager) Register(gen Generator) {
     mgr.Generators[gen.GetName()] = gen
 }
 

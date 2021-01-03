@@ -4,14 +4,15 @@ import (
     "encoding/json"
     "github.com/bonbot-team/bonapi/generator"
     "github.com/bonbot-team/bonapi/utils"
-    "github.com/julienschmidt/httprouter"
+    "github.com/gorilla/mux"
     "net/http"
     "strings"
 )
 
-func CreateRoute(res http.ResponseWriter, req *http.Request, p httprouter.Params) {
-    
-    genName := strings.ToLower(p.ByName("generator"))
+func CreateRoute(res http.ResponseWriter, req *http.Request) {
+    p := mux.Vars(req)
+
+    genName := strings.ToLower(p["generator"])
     genPtr := generator.GetMgr().Get(genName)
     
     if genPtr == nil {
